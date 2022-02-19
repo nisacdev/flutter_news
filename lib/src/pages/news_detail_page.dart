@@ -3,8 +3,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-import '../data/models/article_model.dart';
-import '../data/models/news_model.dart';
+import '../models/news_model.dart';
 import '../widgets/news_list.dart';
 import 'screens.dart';
 
@@ -64,7 +63,7 @@ class _NewsTitle extends StatelessWidget{
               onPressed: ()=> Navigator.pop(context),
             ),
           ),
-          TextSpan(text: '${news.title}'),
+          TextSpan(text: '${news.title}.'),
           TextSpan(
             text: 'See all',
             style: const TextStyle(fontSize: 16, color: Colors.blue),
@@ -103,7 +102,7 @@ final Article news;
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20)
       ),
-      child: FadeInImage(height: 300, fit: BoxFit.cover,placeholder: const AssetImage('assets/giphy.gif'),
+      child: FadeInImage(height: 300, fit: BoxFit.cover,placeholder: const AssetImage(''),
       image: NetworkImage(news.urlToImage ?? 'https://res.cloudinary.com/brandon-rs/image/upload/v1643560194/no-image_suebjt.jpg'),),
     );
   }

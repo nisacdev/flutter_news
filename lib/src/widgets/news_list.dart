@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../data/models/article_model.dart';
-import '../data/models/news_model.dart';
-import '../views/news_detail_page.dart';
+import 'package:flutter_news/src/constants.dart';
+
+import '../models/news_model.dart';
+import '../pages/news_detail_page.dart';
+
 
 class NewsList extends StatelessWidget {
   const NewsList({Key? key, required this.newsList}) : super(key: key);
@@ -40,7 +42,19 @@ class _New extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [],
+      children: [
+        _TopBarCard(index: index, news: news),
+        _CardTitle(news: news),
+        _CardImage(news: news),
+        _CardBody(news: news),
+        const CardButtons(),
+        const SizedBox(
+          height: 5,
+        ),
+        const Divider(
+          color: Colors.white,
+        )
+      ],
     );
   }
 }
@@ -60,12 +74,21 @@ class _TopBarCard extends StatelessWidget {
         children: [
           Text(
             '${index + 1}. ',
-            style: const TextStyle(color: Colors.red),
+            style: const TextStyle(color:secondColor),
           ),
-          Text('${news.source.name}'),
+          Text('${news.source.name}.'),
         ],
       ),
     );
+  }
+}
+
+class _CardTitle extends StatelessWidget {
+  const _CardTitle({Key? key, required this.news}) : super(key: key);
+  final Article news;
+  @override
+  Widget build(BuildContext context) {
+    return Text(news.title,style: const TextStyle(fontSize: 20, fontWeight:FontWeight.w700 ),);
   }
 }
 
@@ -114,9 +137,16 @@ class CardButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         RawMaterialButton(
-          onPressed: (){},
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          fillColor: Colors.blue,
+          onPressed: () {},
+          shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          fillColor: forwardButton,
+          child: const Icon(Icons.arrow_forward),
+        ),
+        const SizedBox(width: 10),
+        RawMaterialButton(
+          onPressed: () {},
+          shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          fillColor: backButton,
           child: const Icon(Icons.arrow_back),
         ),
       ],

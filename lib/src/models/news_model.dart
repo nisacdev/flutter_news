@@ -1,5 +1,32 @@
-import 'source_model.dart';
 import 'dart:convert';
+
+class NewsResponse {
+  NewsResponse({
+    required this.status,
+    required this.totalResults,
+    required this.articles,
+  });
+
+  String status;
+  int totalResults;
+  List<Article> articles;
+
+  factory NewsResponse.fromJson(String str) => NewsResponse.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory NewsResponse.fromMap(Map<String, dynamic> json) => NewsResponse(
+        status: json["status"],
+        totalResults: json["totalResults"],
+        articles: List<Article>.from(json["articles"].map((x) => Article.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "status": status,
+        "totalResults": totalResults,
+        "articles": List<dynamic>.from(articles.map((x) => x.toMap())),
+      };
+}
 
 
 class Article {
@@ -51,4 +78,24 @@ factory Article.fromJson(String str) => Article.fromMap(json.decode(str));
       };
 }
 
+class Source {
+  Source({this.id, required this.name});
+
+  String? id;
+  String name;
+
+  factory Source.fromJson(String str) => Source.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Source.fromMap(Map<String, dynamic> json) => Source(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id,
+        "name": name,
+      };
+}
 
